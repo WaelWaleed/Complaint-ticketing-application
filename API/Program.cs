@@ -23,29 +23,9 @@ builder.Services.AddDbContext<DBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyConn"));
 });
 
-////Authentication
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.Authority = "https://localhost:7220";
-//        options.Audience = "weatherapi";
-//        options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
-//    });
-
-//Identity
-//builder.Services.AddIdentityServer(setupAction: options =>
-//{
-//    options.Events.RaiseErrorEvents = true;
-//    options.Events.RaiseInformationEvents = true;
-//    options.Events.RaiseFailureEvents = true;
-//    options.Events.RaiseSuccessEvents = true;
-
-//    options.EmitStaticAudienceClaim = true;
-//}).AddTestUsers(Config.Users)
-//    .AddInMemoryClients(Config.Clients)
-//    .AddInMemoryApiResources(Config.ApiResources)
-//    .AddInMemoryApiScopes(Config.ApiScopes)
-//    .AddInMemoryIdentityResources(Config.IdentityResources);
+//builder.Services.AddFluentValidation(
+//    fv => fv.RegisterValidatorsFromAssemblyContaining<DTO.Complaint>(lifetime: ServiceLifetime.Transient)
+//);
 
 //Serilog
 IConfigurationRoot configuration = new ConfigurationBuilder()

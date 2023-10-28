@@ -136,12 +136,8 @@ namespace UI.Controllers
         [HttpDelete]
         public async Task<ActionResult> Delete(int ID)
         {
-
-            DTO.Complaint Complaint = new Complaint
-            {
-                ID = ID,
-                IsDeleted = true
-            };
+            var Complaint = await _client.Complaint.GetByID(ID);
+            Complaint.IsDeleted = true;
             var Forcast = await _client.Complaint.Delete(Complaint);
 
             if (Forcast != null && Forcast.ID != -99)

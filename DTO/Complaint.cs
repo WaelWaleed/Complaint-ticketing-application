@@ -9,10 +9,10 @@ namespace DTO
 {
     public class Complaint : BaseDTO
     {
-        public string? Description {  get; set; }
+        public string Description {  get; set; }
         public bool Approved { get; set; } = false;
-        public string? UserName { get; set; }
-        public string? UserNumber { get; set; }
+        public string UserName { get; set; }
+        public string UserNumber { get; set; }
         public List<DTO.FileInfo>? AttachmentInfo { get; set; }
         public string? Attachment { get; set; }
         public int UserID { get; set; }
@@ -50,6 +50,17 @@ namespace DTO
                 RuleFor(e => e.UserNumber).NotNull().WithMessage("User Number Is Required");
                 RuleFor(e => e.UserNumber).NotEmpty().WithMessage("User Number Is Required");
 
+            });
+            When(e => e.ID > 0 && e != null && e.IsDeleted == true, () =>
+            {
+                RuleFor(e => e.Description).Null();
+                RuleFor(e => e.Description).Empty();
+
+                RuleFor(e => e.UserName).Null();
+                RuleFor(e => e.UserName).Empty();
+
+                RuleFor(e => e.UserNumber).Null();
+                RuleFor(e => e.UserNumber).Empty();
             });
         }
     }
