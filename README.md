@@ -1,7 +1,9 @@
 This is a Complaint Ticketing Application, it is designed based on the Repository Design Pattern.
 
 **NOTES: 1. To Run the Application please make sure that the UI,API and ID_Service are the startup projects**
+
 **NOTES: 2. To LOGIN as an admin => username:Admin password:Admin_123**
+
 **NOTES: 3. To LOGIN as an admin => username:User password:User_123**
 
 
