@@ -23,8 +23,8 @@ namespace Entity
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();
-            var ConnectionString = @"Data Source=.;Initial Catalog=CTA;user id=sa;password=abc_123;TrustServerCertificate=True;MultipleActiveResultSets=true";
-            optionsBuilder.UseSqlServer(ConnectionString);
+            //var ConnectionString = @"Data Source=.;Initial Catalog=CTA;user id=sa;password=abc_123;TrustServerCertificate=True;MultipleActiveResultSets=true";
+            //optionsBuilder.UseSqlServer(ConnectionString);
         }
 
         public DbSet<Complaint> Complaint {  get; set; }
