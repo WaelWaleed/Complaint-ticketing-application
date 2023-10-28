@@ -76,7 +76,8 @@ namespace API.Controllers
         [Route("[action]")]
         public IActionResult Delete(DTO.Complaint Complaint)
         {
-            var EntityComplaint = _mapper.Map<Entity.Complaint>(Complaint);
+            var EntityComplaint = _unitOfWork.Complaint.GetByID(Complaint.ID);
+            EntityComplaint.IsDeleted = Complaint.IsDeleted;
             _unitOfWork.Complaint.Update(EntityComplaint);
             _unitOfWork.Complete();
             return Ok(Complaint);

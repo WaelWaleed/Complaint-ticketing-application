@@ -1,5 +1,6 @@
 ﻿using Castle.Core.Resource;
 using DTO;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.SqlServer.Server;
@@ -13,14 +14,18 @@ namespace UI.Controllers
     public class ComplaintController : Controller
     {
         private readonly IClientContainer _client;
-        public ComplaintController(IClientContainer clientContainer)
+        public ComplaintController(IClientContainer Client)
         {
-            _client = clientContainer;
+            _client = Client;
         }
         public async Task<IActionResult> Index()
         {
-            var x = await _client.Complaint.GetAll();
-            return View(x);
+            //var x = User.FindFirst("Id");
+
+            //var token = await HttpContext.GetTokenAsync("access_token");
+
+            var AllComplaints = await _client.Complaint.GetAll();
+            return View(AllComplaints);
         }
         public async Task<IActionResult> AddEdit(int ID)
         {
@@ -38,7 +43,8 @@ namespace UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Save([FromForm] DTO.Complaint Complaint)
         {
-            Complaint.Demands = Complaint.Demands != null ? Complaint.Demands : new List<Demand>(); 
+
+            Complaint.Demands = Complaint.Demands != null ? Complaint.Demands : new List<Demand>();
             Complaint.UserID = 1;
 
 
@@ -93,6 +99,11 @@ namespace UI.Controllers
                 }
                 else
                 {
+                    if(Complaint.Attachment == null)
+                    {
+                        var ExistingAttachment = await _client.Complaint.GetByID(Complaint.ID);
+                        Complaint.Attachment = ExistingAttachment.Attachment;
+                    }
                     var Result = await _client.Complaint.Update(Complaint);
                     if (Result.IsSuccess)
                     {
@@ -119,6 +130,34 @@ namespace UI.Controllers
             }
 
             return null;
+
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int ID)
+        {
+
+            DTO.Complaint Complaint = new Complaint
+            {
+                ID = ID,
+                IsDeleted = true
+            };
+            var Forcast = await _client.Complaint.Delete(Complaint);
+
+            if (Forcast != null && Forcast.ID != -99)
+            {
+                return Json(Forcast);
+            }
+            else
+            {
+                var result = new
+                {
+                    result = Forcast,
+                    type = Forcast.GetType().Name,
+                    errorReasonMessage = "Cannot Delete"
+                };
+                return Json(result);
+            }
 
         }
 
