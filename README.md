@@ -1,5 +1,10 @@
 This is a Complaint Ticketing Application, it is designed based on the Repository Design Pattern.
-It has 2 main modules (API, UI).
+**NOTES: 1. To Run the Application please make sure that the UI,API and ID_Service are the startup projects**
+**NOTES: 2. To LOGIN as an admin => username:Admin password:Admin_123**
+**NOTES: 3. To LOGIN as an admin => username:User password:User_123**
+
+
+It has 3 main modules (API, UI, ID_Service).
 
 Modules:
   1. API:
@@ -35,9 +40,13 @@ Modules:
                2.2.1.1: Index: this view displays all the complaints for the admin to approve them on reject them. Also, the user is able to edit his complaint.
        
                2.2.1.2: AddEdit: this is the view that has the complaint form which allows the user to submit a complaint. This view also has a partialview for the                             demands.
-       
-                         ****Note: you need to press the "plus" icon to add the demands into the table below inorder to be saved as demands for that complaint.****
+       ****Note: you need to press the "plus" icon to add the demands into the table below inorder to be saved as demands for that complaint.****
        
                          once the demand is added, the user can either edit it or delete it by clicking the "Edit" icon and "Delete" icon.
-       
-                         ****Note: sometimes you need to click the icons twice inorder for functionality to work.****
+       ****Note: sometimes you need to click the icons twice inorder for functionality to work.****
+
+
+   3. ID_Service:
+
+      - This is the module that has the Identity Server, it is responsible of handling the logins and authorization and authenrication.
+        **Note: It is still not fully finished**
