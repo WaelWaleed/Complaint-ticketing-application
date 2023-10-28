@@ -5,6 +5,7 @@ Modules:
   1. API:
      - This is a webapi module that handles requests and returns responses.
      - This module is connected to another 2 modules which are (Entity, DTO):
+       
          1.1.1: Entity: It is module that has all the models stored in the database as proxies.
          1.1.2: DTO: It the a module that has all the models that need to be sent to User Interface (UI).
        - The API module maps the data from DTO to Entity vice versa.
