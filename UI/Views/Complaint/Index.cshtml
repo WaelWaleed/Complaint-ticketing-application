@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DTO.Complaint>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Add Button -->
+<div class="container mt-4">
+    <a href="@Url.Action("AddEdit","Complaint", new { ID = 0 })" class="btn btn-warning btn-circle  btn-outline">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
+<!-- Table Section -->
+<section id="table" class="container mt-5">
+    <h2 class="text-center">Complaints</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>User Number</th>
+                    <th>Description</th>
+                    <th>Demands</th>
+                    <th>Attachments</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Complaint in Model)
+                {
+                    <tr>
+                        <td>@Complaint.UserName</td>
+                        <td>@Complaint.UserNumber</td>
+                        <td>@Complaint.Description</td>
+                        <td>@string.Join(',', Complaint.Demands.Select(e=>e.Description))</td>
+                        <td style="text-align:center"><a href="@Url.Action("DownloadFile","Complaint", new {fileName=Complaint.Attachment})">@Html.DisplayFor(e=>Complaint.Attachment)</a></td>
+                        @if (!@Complaint.Approved)
+                        {
+                            <td style="background-color: #FD1C03" class="status">Rejected</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: #90EE90" class="status">Approved</td>
+                        }
+                        <td>
+                            <span class="Approve">
+                                <a href="@Url.Action("AddEdit", "Complaint", new { ID = Complaint.ID })">
+                                    <i class="fas fa-edit text-warning"></i>
+                                </a>
+                            </span>
+                            <span class="Approve" data-value="@Complaint.ID">
+                                <i class="fas fa-check text-success"></i>
+                            </span>
+                            <span class="Reject" data-value="@Complaint.ID">
+                                <i class="fas fa-times text-danger"></i>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

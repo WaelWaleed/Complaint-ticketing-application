@@ -11,7 +11,7 @@ namespace DTO
     {
         public string Description { get; set; }
         public int ComplaintID { get; set; }
-        public Complaint? Complaint { get; set; }
+        //public Complaint? Complaint { get; set; }
     }
 
     public class DemandValidation : AbstractValidator<Demand>

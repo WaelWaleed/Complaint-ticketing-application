@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,10 @@ namespace Entity
                 .HasConstraintName("FK_UserType_User")
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<User>()
+                .Property(e => e.ID)
+                .ValueGeneratedNever();
+
             modelBuilder.Entity<UserType>()
                 .HasData(
                     new UserType
@@ -73,7 +78,7 @@ namespace Entity
                 .HasData(
                     new User
                     {
-                        Name = "user",
+                        Name = "Admin",
                         Mobile = "1037059021",
                         ID = 1,
                         TypeID = 2,

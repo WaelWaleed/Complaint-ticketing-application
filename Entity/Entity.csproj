@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <Compile Remove="Class1.cs" />
+    <Compile Remove="Migrations\20231024141241_Initialize.cs" />
+    <Compile Remove="Migrations\20231024141241_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20231024142521_10242023_1725.cs" />
+    <Compile Remove="Migrations\20231024142521_10242023_1725.Designer.cs" />
+    <Compile Remove="Migrations\20231025102202_10252023_1321.cs" />
+    <Compile Remove="Migrations\20231025102202_10252023_1321.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

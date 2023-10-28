@@ -1,0 +1,65 @@
+﻿@model DTO.Complaint
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!-- Header Section -->
+<header class="bg-dark text-white text-center p-4">
+    Complaints Section
+</header>
+
+<!-- Form Section -->
+<section id="form" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">Enter the Complaint</h2>
+            @using (Html.BeginForm("Save", "Complaint", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="hidden" asp-for="@Model.ID" name="Complaint.ID" />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6 col-sm-12">
+                            <label for="message">User Name:</label>
+@*                             @Html.TextBoxFor(e=>e.UserName, new { Name="Complaint.Name", @class="form-control"}) *@
+                            <input type="text" asp-for="@Model.UserName" name="Complaint.UserName" class="form-control" />
+                            @Html.ValidationMessageFor(e => e.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-6 col-sm-12">
+                            <label for="message">User Number:</label>
+                            @* @Html.TextBoxFor(e=>e.UserNumber, new {@class="form-control"}) *@
+                            <input type="text" asp-for="@Model.UserNumber" name="Complaint.UserNumber" class="form-control" />
+                            @Html.ValidationMessageFor(e => e.UserNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label @* for="message" *@>Complaint:</label>
+                    <textarea asp-for="@Model.Description" name="Complaint.Description" class="form-control"></textarea>
+                    @Html.ValidationMessageFor(e => e.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="message">Attachment:</label>
+                        @Html.TextBoxFor(e=>e.Attachment,new{type="file"})
+                        @Html.ValidationMessageFor(e=>e.Attachment,"",new {@class="text-danger"})
+                    </div>
+                </div>
+
+
+                @Html.Partial("Demands.cshtml", Model)
+
+                <br />
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            }
+        </div>
+    </div>
+</section>
+
+
+
+
+
+

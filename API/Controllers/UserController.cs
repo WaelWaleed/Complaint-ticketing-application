@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
@@ -7,6 +8,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -41,6 +43,7 @@ namespace API.Controllers
         public IActionResult Create(DTO.User User)
         {
             var EntityUser = _mapper.Map<Entity.User>(User);
+            EntityUser.TypeID = 1;
             _unitOfWork.User.Create(EntityUser);
             _unitOfWork.Complete();
             User.ID = EntityUser.ID;

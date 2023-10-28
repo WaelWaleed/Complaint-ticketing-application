@@ -1,0 +1,50 @@
+﻿@model DTO.Complaint
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<hr />
+    <div style="text-align:center">
+        <h3>Demands List</h3>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="">
+                    <label>Demand: </label><input id="DemandInput" class="" type="text" width="150px;"/>
+                    <span id="AddDemand" class="btn btn-warning btn-circle  btn-outline"><i class="fas fa-plus"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+<!-- Table Section -->
+<section id="table" class="container mt-5">
+    <h2>Complaints</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="DemandTBody">
+            @{var Counter = 0;}
+            @foreach (var Demand in Model.Demands)
+            {
+                <tr class="Row_@Counter">
+                    <input type="hidden" name="Complaint.Demands[@Counter].Description" value="@Demand.Description" />
+                    <input type="hidden" name="Complaint.Demands[@Counter].ID" value="@Demand.ID" />
+                    <td>@Demand.ID</td>
+                    <td>@Demand.Description</td>
+                    <td>
+                        <i class="fas fa-times text-trash"></i>
+                    </td>
+                </tr>
+                Counter++;
+            }
+        </tbody>
+    </table>
+</section>

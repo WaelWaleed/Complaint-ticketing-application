@@ -1,5 +1,7 @@
+using API;
 using Entity;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Serilog;
@@ -20,6 +22,30 @@ builder.Services.AddDbContext<DBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyConn"));
 });
+
+////Authentication
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.Authority = "https://localhost:7220";
+//        options.Audience = "weatherapi";
+//        options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+//    });
+
+//Identity
+//builder.Services.AddIdentityServer(setupAction: options =>
+//{
+//    options.Events.RaiseErrorEvents = true;
+//    options.Events.RaiseInformationEvents = true;
+//    options.Events.RaiseFailureEvents = true;
+//    options.Events.RaiseSuccessEvents = true;
+
+//    options.EmitStaticAudienceClaim = true;
+//}).AddTestUsers(Config.Users)
+//    .AddInMemoryClients(Config.Clients)
+//    .AddInMemoryApiResources(Config.ApiResources)
+//    .AddInMemoryApiScopes(Config.ApiScopes)
+//    .AddInMemoryIdentityResources(Config.IdentityResources);
 
 //Serilog
 IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -53,6 +79,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.UseIdentityServer();
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 
